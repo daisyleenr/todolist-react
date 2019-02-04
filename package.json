@@ -15,7 +15,7 @@
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
-    "extends": ["react-app", "airbnb"],
+    "extends": ["react-app", "airbnb", "prettier"],
     "rules": {
       "react/prefer-stateless-function": 0,
       "react/jsx-filename-extension": 0,
