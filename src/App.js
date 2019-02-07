@@ -33,7 +33,7 @@ class App extends Component {
     const todoData = {
       id: this.id++,
       text,
-      checkd: false,
+      checked: false,
     };
 
     this.setState({
@@ -52,14 +52,11 @@ class App extends Component {
 
     // this.setState({ todos: nextTodos });
 
-    this.setState(({todos}) => ({
-      todos: todos.map(todo => {
-        if (todo.id === id) {
-          return { ...todo, checked: !todo.checked };
-        }
-        return todo;
-      });
-    }))
+    this.setState(({ todos }) => ({
+      todos: todos.map(todo =>
+        todo.id === id ? { ...todo, checked: !todo.checked } : todo,
+      ),
+    }));
   };
 
   handleRemove = id => {

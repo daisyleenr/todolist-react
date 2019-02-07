@@ -10,6 +10,7 @@ const TodoList = ({ todos, onCheck, onRemove }) => {
       text={todo.text}
       onCheck={onCheck}
       onRemove={onRemove}
+      todo={todo}
     />
   ));
 
