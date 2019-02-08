@@ -1,4 +1,6 @@
 /* eslint-disable no-plusplus */
+import produce from 'immer';
+
 import React, { Component } from 'react';
 import CreateFrom from './components/CreateForm';
 import TodoList from './components/TodoList';
@@ -29,16 +31,15 @@ class App extends Component {
   };
 
   handleCreate = text => {
-    const { todos } = this.state;
-    const todoData = {
-      id: this.id++,
-      text,
-      checked: false,
-    };
-
-    this.setState({
-      todos: todos.concat(todoData),
-    });
+    this.setState(
+      produce(draft => {
+        draft.todos.push({
+          id: this.id++,
+          text,
+          checked: false,
+        });
+      }),
+    );
   };
 
   handleCheck = id => {
