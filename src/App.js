@@ -1,11 +1,42 @@
 /* eslint-disable no-plusplus */
 import produce from 'immer';
+import styled, { css } from 'styled-components';
 
 import React, { Component } from 'react';
 import CreateFrom from './components/CreateForm';
 import TodoList from './components/TodoList';
 
-import './App.css';
+const Background = styled.div`
+  width: 600px;
+  margin: 0 auto;
+  margin-top: 3rem;
+
+  ${props =>
+    props.shadow &&
+    css`
+      box-shadow: 0px 20px 150px #809baf;
+    `};
+`;
+
+const Header = styled.div`
+  background: ${props => props.color || 'red'}
+  color: white;
+  padding: 2rem;
+`;
+
+const H1 = styled.h1`
+  margin: 0;
+  text-align: center;
+  font-weight: 300;
+`;
+
+const WhiteBox = styled.div`
+  background: white;
+  padding: 2rem;
+  min-height: 8rem;
+  max-height: 25rem;
+  overflow-y: auto;
+`;
 
 class App extends Component {
   id = 3;
@@ -74,19 +105,19 @@ class App extends Component {
     const { todos } = this.state;
 
     return (
-      <div className="App">
-        <div className="header">
-          <h1>오늘 뭐할까?</h1>
-        </div>
+      <Background shadow>
+        <Header color="#3bc9db">
+          <H1>오늘 뭐할까?</H1>
+        </Header>
         <CreateFrom onSubmit={this.handleCreate} />
-        <div className="white-box">
+        <WhiteBox>
           <TodoList
             todos={todos}
             onCheck={this.handleCheck}
             onRemove={this.handleRemove}
           />
-        </div>
-      </div>
+        </WhiteBox>
+      </Background>
     );
   }
 }
