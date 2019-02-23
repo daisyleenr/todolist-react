@@ -1,6 +1,8 @@
 /* eslint-disable no-plusplus */
 import produce from 'immer';
 import styled, { css } from 'styled-components';
+import axios from 'axios';
+import qs from 'qs';
 
 import React, { Component } from 'react';
 import CreateForm from './components/CreateForm';
@@ -39,38 +41,27 @@ const WhiteBox = styled.div`
 `;
 
 class App extends Component {
-  id = 3;
-
   state = {
-    todos: [
-//      {
-//        id: 0,
-//        text: '앵귤러 배우고',
-//        checked: true,
-//      },
-//      {
-//        id: 1,
-//        text: '리액트 배우고',
-//        checked: false,
-//      },
-//      {
-//        id: 2,
-//        text: '뷰 배우자',
-//        checked: false,
-//      },
-    ],
+    todos: [],
   };
 
   handleCreate = text => {
-    this.setState(
-      produce(draft => {
-        draft.todos.push({
-          id: this.id++,
-          text,
-          checked: false,
-        });
-      }),
-    );
+    let body = {
+        text: text, check: false
+    }
+    axios.post('http://localhost:5000/todo', qs.stringify(body))
+      .then(response => {
+        console.log(response);
+        this.setState(
+          produce(draft => {
+            draft.todos.push(response.data);
+          }),
+        );
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+    console.log('handleCreate', this.state);
   };
 
   handleCheck = id => {
@@ -123,25 +114,21 @@ class App extends Component {
   }
 
   componentDidMount() {
-    fetch("http://localhost:5000/list")
-      .then(res => res.json())
-      .then(
-        (result) => {
-        console.log(result);
+      axios.get('http://localhost:5000/todos')
+      .then(response => {
+        // handle success
+        console.log(response);
           this.setState({
-            todos: result
+            todos: response.data
           });
-        },
-        // Note: it's important to handle errors here
-        // instead of a catch() block so that we don't swallow
-        // exceptions from actual bugs in components.
-        (error) => {
-          this.setState({
-            isLoaded: true,
-            error
-          });
-        }
-      )
+      })
+      .catch(function (error) {
+        // handle error
+        console.log(error);
+      })
+      .then(function () {
+        // always executed
+      });
 
     console.log('didmount', this.state);
   }
