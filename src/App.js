@@ -54,7 +54,7 @@ class App extends Component {
         console.log(response);
         this.setState(
           produce(draft => {
-            draft.todos.push(response.data);
+            draft.todos = response.data;
           }),
         );
       })
