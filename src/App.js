@@ -49,7 +49,7 @@ class App extends Component {
     let body = {
         text: text, check: false
     }
-    axios.post('http://localhost:5000/todo', qs.stringify(body))
+    axios.post('http://localhost:5000/todos', qs.stringify(body))
       .then(response => {
         console.log(response);
         this.setState(
