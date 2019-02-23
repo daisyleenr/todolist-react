@@ -75,11 +75,18 @@ class App extends Component {
 
     // this.setState({ todos: nextTodos });
 
-    this.setState(({ todos }) => ({
-      todos: todos.map(todo =>
-        todo.id === id ? { ...todo, checked: !todo.checked } : todo,
-      ),
-    }));
+    axios.put('http://localhost:5000/todos/' + id)
+          .then(response => {
+            console.log(response);
+            this.setState(
+              produce(draft => {
+                draft.todos = response.data;
+              }),
+            );
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
   };
 
   handleRemove = id => {
@@ -87,9 +94,18 @@ class App extends Component {
     // const nextTodos = todos.filter(todo => todo.id !== id);
     // this.setState({ todos: nextTodos });
 
-    this.setState(({ todos }) => ({
-      todos: todos.filter(todo => todo.id !== id),
-    }));
+    axios.delete('http://localhost:5000/todos/' + id)
+          .then(response => {
+            console.log(response);
+            this.setState(
+              produce(draft => {
+                draft.todos = response.data;
+              }),
+            );
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
   };
 
   render() {
