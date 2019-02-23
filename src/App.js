@@ -43,21 +43,21 @@ class App extends Component {
 
   state = {
     todos: [
-      {
-        id: 0,
-        text: '앵귤러 배우고',
-        checked: true,
-      },
-      {
-        id: 1,
-        text: '리액트 배우고',
-        checked: false,
-      },
-      {
-        id: 2,
-        text: '뷰 배우자',
-        checked: false,
-      },
+//      {
+//        id: 0,
+//        text: '앵귤러 배우고',
+//        checked: true,
+//      },
+//      {
+//        id: 1,
+//        text: '리액트 배우고',
+//        checked: false,
+//      },
+//      {
+//        id: 2,
+//        text: '뷰 배우자',
+//        checked: false,
+//      },
     ],
   };
 
@@ -102,6 +102,7 @@ class App extends Component {
   };
 
   render() {
+    console.log('render', this.state);
     const { todos } = this.state;
 
     return (
@@ -120,6 +121,29 @@ class App extends Component {
       </Background>
     );
   }
-}
 
+  componentDidMount() {
+    fetch("http://localhost:5000/list")
+      .then(res => res.json())
+      .then(
+        (result) => {
+        console.log(result);
+          this.setState({
+            todos: result
+          });
+        },
+        // Note: it's important to handle errors here
+        // instead of a catch() block so that we don't swallow
+        // exceptions from actual bugs in components.
+        (error) => {
+          this.setState({
+            isLoaded: true,
+            error
+          });
+        }
+      )
+
+    console.log('didmount', this.state);
+  }
+}
 export default App;
