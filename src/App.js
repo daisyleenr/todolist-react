@@ -3,7 +3,7 @@ import produce from 'immer';
 import styled, { css } from 'styled-components';
 
 import React, { Component } from 'react';
-import CreateFrom from './components/CreateForm';
+import CreateForm from './components/CreateForm';
 import TodoList from './components/TodoList';
 
 const Background = styled.div`
@@ -110,7 +110,7 @@ class App extends Component {
         <Header color="#3bc9db">
           <H1>오늘 뭐할까?</H1>
         </Header>
-        <CreateFrom onSubmit={this.handleCreate} />
+        <CreateForm onSubmit={this.handleCreate} />
         <WhiteBox>
           <TodoList
             todos={todos}
