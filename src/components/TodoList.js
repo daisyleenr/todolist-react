@@ -7,7 +7,7 @@ const TodoList = ({ todos, onCheck, onRemove }) => {
       id={todo.id}
       key={todo.id}
       checked={todo.checked}
-      text={todo.text}
+      text={todo.title}
       onCheck={onCheck}
       onRemove={onRemove}
       todo={todo}
