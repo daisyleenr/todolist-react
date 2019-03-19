@@ -1,4 +1,16 @@
 # todolist-react
-스터디용 토이 프로젝트
+React project for study 
 
-* react
+# Requirements
+* node >= v10.15.1
+* yarn
+
+# Install modules
+```
+$ yarn install
+```
+
+# Run
+```
+$ yarn start
+```
