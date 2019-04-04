@@ -1,3 +1,6 @@
+/* eslint-disable react/sort-comp */
+/* eslint-disable no-param-reassign */
+/* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable no-plusplus */
 import produce from 'immer';
 import styled, { css } from 'styled-components';
@@ -46,10 +49,12 @@ class App extends Component {
   };
 
   handleCreate = text => {
-    let body = {
-        text: text, check: false
-    }
-    axios.post('http://localhost:5000/todos', qs.stringify(body))
+    const body = {
+      text,
+      check: false,
+    };
+    axios
+      .post('http://localhost:5000/todos', qs.stringify(body))
       .then(response => {
         console.log(response);
         this.setState(
@@ -58,7 +63,7 @@ class App extends Component {
           }),
         );
       })
-      .catch(function (error) {
+      .catch(function(error) {
         console.log(error);
       });
     console.log('handleCreate', this.state);
@@ -75,18 +80,19 @@ class App extends Component {
 
     // this.setState({ todos: nextTodos });
 
-    axios.put('http://localhost:5000/todos/' + id)
-          .then(response => {
-            console.log(response);
-            this.setState(
-              produce(draft => {
-                draft.todos = response.data;
-              }),
-            );
-          })
-          .catch(function (error) {
-            console.log(error);
-          });
+    axios
+      .put(`http://localhost:5000/todos/${id}`)
+      .then(response => {
+        console.log(response);
+        this.setState(
+          produce(draft => {
+            draft.todos = response.data;
+          }),
+        );
+      })
+      .catch(function(error) {
+        console.log(error);
+      });
   };
 
   handleRemove = id => {
@@ -94,18 +100,19 @@ class App extends Component {
     // const nextTodos = todos.filter(todo => todo.id !== id);
     // this.setState({ todos: nextTodos });
 
-    axios.delete('http://localhost:5000/todos/' + id)
-          .then(response => {
-            console.log(response);
-            this.setState(
-              produce(draft => {
-                draft.todos = response.data;
-              }),
-            );
-          })
-          .catch(function (error) {
-            console.log(error);
-          });
+    axios
+      .delete(`http://localhost:5000/todos/${id}`)
+      .then(response => {
+        console.log(response);
+        this.setState(
+          produce(draft => {
+            draft.todos = response.data;
+          }),
+        );
+      })
+      .catch(function(error) {
+        console.log(error);
+      });
   };
 
   render() {
@@ -130,19 +137,20 @@ class App extends Component {
   }
 
   componentDidMount() {
-      axios.get('http://localhost:5000/todos')
+    axios
+      .get('http://localhost:5000/todos')
       .then(response => {
         // handle success
         console.log(response);
-          this.setState({
-            todos: response.data
-          });
+        this.setState({
+          todos: response.data,
+        });
       })
-      .catch(function (error) {
+      .catch(function(error) {
         // handle error
         console.log(error);
       })
-      .then(function () {
+      .then(function() {
         // always executed
       });
 
