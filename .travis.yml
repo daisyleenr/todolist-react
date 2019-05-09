@@ -11,21 +11,25 @@ env:
     - secure: EM6qgwVRslp3mjcUzUCvCJCcXY7HidpYsZa69sWq9pOaW7QZ+9ocBaXDVuvg0wIzIgnMso4NcDvCVEPQVWTNpFgGgh4RBX13hlp0AwM4eJkEf68u5oC19XSclDSA36x07r3cpZMNSR21ZXld/j2KF25W1Daae6tL+TFCQvRvmjY8B+wVivtHfc1XTBomBZtE6nhy218j6NNvAdP3DD+uRZYAg5mGKZyYeZgF+Jd+afQf2+vhByAjiHWwH7+xwmpz88W3z/6nzpMs7CcfULJ4UvFsmu1Dd1p1aRAVSC0TlDXqe120ZbokYoJWgYsDVfr84IK11xUqmPDfM5T+lDiTcST3fXr5NXsO/pEn1KOugGsVEbHTzY46II597LGqXfqcYCv2IuqJcbGRZMDfgaBts0rbEDl122uohWz9v0Q4aQd4Vonj9VmUuUnrTnM3KlWLNUrBwq9CveAwL+6lRMjEzcErcz1ZuPvLPGd5nPNK25pWV9b1krToVdb/tdXc7ui1bRVYD0t+WNh5suE9UlJK+tsONb9wjjwKDnZE3ma+x3muHylwR8PMjJvU1HEHzUhMtUD850riwK0HPjfB/CL04t2lRF7rNtQMMeuXTQCJX+8f59j/pn9iVj25tKlY23a5unhkxJYYOD6AI6FOuSQIU3ULn3jZTmNoxf7RaALT6y0=
 
 before_install:
-  - docker build -t daisyleenr/todo-frontend:$TRAVIS_BUILD_NUMBER -t daisyleenr/todo-frontend:latest .
-  - docker run -d -p 3000:3000 daisyleenr/todo-frontend:latest
-  - docker ps -a
+  - openssl aes-256-cbc -K $encrypted_49dbbfc5ec1a_key -iv $encrypted_49dbbfc5ec1a_iv
+    -in deploy_key.enc -out ./deploy_key -d
+  # - docker build -t daisyleenr/todo-frontend:$TRAVIS_BUILD_NUMBER -t daisyleenr/todo-frontend:latest .
+  # - docker run -d -p 3000:3000 daisyleenr/todo-frontend:latest
+  # - docker ps -a
 
 install:
-  - npm install
+  # - npm install
 
 script: true
 
 deploy:
   provider: script
-  script: bash docker_push.sh
+  script:
+    # - bash docker_push.sh
+    - bash deploy.sh
   on:
     branch: master
 
-notifications:
+    notifications:
   slack:
     secure: lk6lt9f1JXhTR6I6T2ks0S0woKF8syWRmBsIp+Qcrv0QU1WBpR7YTXtM8deNoTNQs8eUcQFQaT6xqCEe2ey5EhMvfa/It2Otc5MnpnwvIoYY6rN1a4lqQs64GuXWnxoJfRxr/zvDxk+w95cnNO06hWILcXARokP1sfr510DoKtmaRv5q/BuZrEryLAUYkUBmYa8zyRp2aubvj7TV1IG7pL3CPyoX4pCJQncqWZlVYribEaj8EA54sPK8IUtoxUv8w+yV+thh2wD79CoeoQCr0PeMQGb0cbEn3XitnoKyayaL6tgqUE5KM76To4tp9XMSEiDXcMTc49FYSFjyOyBUoAZ/pRf20A7sJntMx0yADeFcnG3rCd7ryQOvOhAZm3CzAlHMAVCoeo19I5G3IgAKGWSBupF2YPBwdZhBs9M6ZRdKYX4hzVmZya/368rkwP6OUsdtDD+KaLBSWSwDKIqlacLYJFWS9b6dQNs7FrebWZyzAc3jw1e4lq8MZVUJ5jGZ56lJ9jV3NomBySqmIhFJErz30uCsGNNWLR0D4w7nGHD816+TDxQdpijyyUYCHnTZ/AKdfmYs3jdZuFmEwTMwZbxXe6hkygOlzwbSUjQjhFE6Jwxw2BrRCe6G2cfcITPKcJCdZETj2WZaKuCr3yhQZK4XZxsnHCQ861KlYMc64zk=
