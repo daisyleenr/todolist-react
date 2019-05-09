@@ -49,12 +49,13 @@ class App extends Component {
   };
 
   handleCreate = text => {
+    console.log(process.env.REACT_APP_API_ADDR);
     const body = {
       text,
       check: false,
     };
     axios
-      .post('http://localhost:5000/todos', qs.stringify(body))
+      .post(`${process.env.REACT_APP_API_ADDR}/todos`, qs.stringify(body))
       .then(response => {
         console.log(response);
         this.setState(
@@ -81,7 +82,7 @@ class App extends Component {
     // this.setState({ todos: nextTodos });
 
     axios
-      .put(`http://localhost:5000/todos/${id}`)
+      .put(`${process.env.REACT_APP_API_ADDR}/todos/${id}`)
       .then(response => {
         console.log(response);
         this.setState(
@@ -101,7 +102,7 @@ class App extends Component {
     // this.setState({ todos: nextTodos });
 
     axios
-      .delete(`http://localhost:5000/todos/${id}`)
+      .delete(`${process.env.REACT_APP_API_ADDR}/todos/${id}`)
       .then(response => {
         console.log(response);
         this.setState(
@@ -138,7 +139,7 @@ class App extends Component {
 
   componentDidMount() {
     axios
-      .get('http://localhost:5000/todos')
+      .get(`${process.env.REACT_APP_API_ADDR}/todos`)
       .then(response => {
         // handle success
         console.log(response);

@@ -12,11 +12,9 @@ services:
       MYSQL_USER: todolist
       MYSQL_PASSWORD: todolist
   todo-api-server:
-    depends_on:
-      - db
     image: daisyleenr/todo-api-server:latest
     ports:
-      - '5001:5000'
+      - '5000:5000'
     restart: always
     environment:
       TODO_DB_USER: todolist
