@@ -25,8 +25,14 @@ script: true
 deploy:
   provider: script
   script:
-    # - bash docker_push.sh
-    - bash deploy.sh
+    # - bash docker_push.sh- eval "$(ssh-agent -s)"
+    - chmod 600 ./deploy_key
+    - echo -e "Host $SERVER_IP_ADDRESS\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config
+    - ssh-add ./deploy_key
+    - ssh -i ./deploy_key root@138.68.163.126 pwd
+    - docker-compose down
+    - docker-compose pull
+    - docker-compose up -d
   on:
     branch: master
 
