@@ -27,9 +27,9 @@ deploy:
   script:
     # - bash docker_push.sh- eval "$(ssh-agent -s)"
     - chmod 600 ./deploy_key
-    - echo -e "Host $SERVER_IP_ADDRESS\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config
+    - echo -e "Host 49.247.210.99\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config
     - ssh-add ./deploy_key
-    - ssh -i ./deploy_key root@138.68.163.126 pwd
+    - ssh -i ./deploy_key root@49.247.210.99 pwd
     - docker-compose down
     - docker-compose pull
     - docker-compose up -d
