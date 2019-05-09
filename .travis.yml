@@ -11,28 +11,19 @@ env:
     - secure: EM6qgwVRslp3mjcUzUCvCJCcXY7HidpYsZa69sWq9pOaW7QZ+9ocBaXDVuvg0wIzIgnMso4NcDvCVEPQVWTNpFgGgh4RBX13hlp0AwM4eJkEf68u5oC19XSclDSA36x07r3cpZMNSR21ZXld/j2KF25W1Daae6tL+TFCQvRvmjY8B+wVivtHfc1XTBomBZtE6nhy218j6NNvAdP3DD+uRZYAg5mGKZyYeZgF+Jd+afQf2+vhByAjiHWwH7+xwmpz88W3z/6nzpMs7CcfULJ4UvFsmu1Dd1p1aRAVSC0TlDXqe120ZbokYoJWgYsDVfr84IK11xUqmPDfM5T+lDiTcST3fXr5NXsO/pEn1KOugGsVEbHTzY46II597LGqXfqcYCv2IuqJcbGRZMDfgaBts0rbEDl122uohWz9v0Q4aQd4Vonj9VmUuUnrTnM3KlWLNUrBwq9CveAwL+6lRMjEzcErcz1ZuPvLPGd5nPNK25pWV9b1krToVdb/tdXc7ui1bRVYD0t+WNh5suE9UlJK+tsONb9wjjwKDnZE3ma+x3muHylwR8PMjJvU1HEHzUhMtUD850riwK0HPjfB/CL04t2lRF7rNtQMMeuXTQCJX+8f59j/pn9iVj25tKlY23a5unhkxJYYOD6AI6FOuSQIU3ULn3jZTmNoxf7RaALT6y0=
 
 before_install:
-  - openssl aes-256-cbc -K $encrypted_49dbbfc5ec1a_key -iv $encrypted_49dbbfc5ec1a_iv
-    -in deploy_key.enc -out ./deploy_key -d
-  # - docker build -t daisyleenr/todo-frontend:$TRAVIS_BUILD_NUMBER -t daisyleenr/todo-frontend:latest .
-  # - docker run -d -p 3000:3000 daisyleenr/todo-frontend:latest
-  # - docker ps -a
+  - docker build -t daisyleenr/todo-frontend:$TRAVIS_BUILD_NUMBER -t daisyleenr/todo-frontend:latest .
+  - docker run -d -p 3000:3000 daisyleenr/todo-frontend:latest
+  - docker ps -a
 
 install:
-  # - npm install
+  - npm install
 
 script: true
 
 deploy:
   provider: script
   script:
-    # - bash docker_push.sh- eval "$(ssh-agent -s)"
-    - chmod 600 ./deploy_key
-    - echo -e "Host 49.247.210.99\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config
-    - ssh-add ./deploy_key
-    - ssh -i ./deploy_key root@49.247.210.99 pwd
-    - docker-compose down
-    - docker-compose pull
-    - docker-compose up -d
+    - bash docker_push.sh
   on:
     branch: master
 
