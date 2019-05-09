@@ -17,6 +17,8 @@ before_install:
 install:
   - npm install
 
+script: true
+
 deploy:
   provider: script
   script: bash docker_push.sh
