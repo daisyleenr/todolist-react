@@ -18,7 +18,9 @@ class TodoItem extends Component {
         className={`TodoItem ${checked && 'active'}`}
         onClick={() => onCheck(id)}
       >
-        <div className="check">&#10004;</div>
+        <div className="check">
+          <i className="fas fa-check-circle" />
+        </div>
         <div className="text">{text}</div>
         <div
           className="remove"

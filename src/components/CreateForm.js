@@ -29,11 +29,11 @@ class CreateForm extends Component {
     return (
       <form className="CreateForm" onSubmit={this.handleSubmit}>
         <input
-          placeholder="오늘 뭐하지..?"
+          placeholder="What are you doing today?"
           onChange={this.handleChange}
           value={input}
         />
-        <button type="submit">추가</button>
+        {/* <button type="submit">Add</button> */}
       </form>
     );
   }

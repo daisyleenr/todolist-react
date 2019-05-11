@@ -1,6 +1,5 @@
 .CreateForm {
   padding: 2rem;
-  background: #343a40;
   display: flex;
 }
 
@@ -11,8 +10,9 @@
 
   flex: 1;
   border-bottom: 1px solid #e9ecef;
-  color: white;
+  color: #fd3355;
   font-size: 1.25rem;
+  padding-bottom: 10px;
 }
 
 .CreateForm input::placeholder {

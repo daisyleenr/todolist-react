@@ -15,32 +15,36 @@ const Background = styled.div`
   width: 600px;
   margin: 0 auto;
   margin-top: 3rem;
+  border-radius: 10px;
+  background-color: white;
 
   ${props =>
     props.shadow &&
     css`
-      box-shadow: 0px 20px 150px #809baf;
+      box-shadow: 0px 1px 50px #0000006b;
     `};
 `;
 
 const Header = styled.div`
-  background: ${props => props.color || 'red'}
-  color: white;
-  padding: 2rem;
+  background: white;
+  color: ${props => props.color || 'red'};
 `;
 
 const H1 = styled.h1`
   margin: 0;
   text-align: center;
-  font-weight: 300;
+  font-size: 3rem;
+  font-weight: 900;
 `;
 
 const WhiteBox = styled.div`
   background: white;
   padding: 2rem;
   min-height: 8rem;
-  max-height: 25rem;
+  max-height: 27rem;
   overflow-y: auto;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
 `;
 
 class App extends Component {
@@ -122,10 +126,10 @@ class App extends Component {
 
     return (
       <Background shadow>
-        <Header color="#3bc9db">
-          <H1>오늘 뭐할까? submodule test</H1>
-        </Header>
         <CreateForm onSubmit={this.handleCreate} />
+        <Header color="#fd3355">
+          <H1>Todo List</H1>
+        </Header>
         <WhiteBox>
           <TodoList
             todos={todos}

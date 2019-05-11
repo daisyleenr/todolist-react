@@ -22,7 +22,7 @@
 
 .TodoItem.active .check {
   opacity: 1;
-  color: #22b8cf;
+  color: #a0a0a0;
 }
 
 .TodoItem.active .text {
