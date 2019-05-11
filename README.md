@@ -1,4 +1,5 @@
 # todolist-react
+[![Build Status](https://travis-ci.org/daisyleenr/todolist-react.svg?branch=master)](https://travis-ci.org/daisyleenr/todolist-react)
 
 React project for study
 
